@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 const Home = () => {
   return (
     <div>
       <ul>
         <li>
-          <a href='/facebook'>Facebook</a>
+          <Link href='/facebook'>Facebook</Link>
         </li>
 
         <li>
