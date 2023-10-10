@@ -7,11 +7,9 @@ const Home = () => {
         <li>
           <Link href='/facebook'>Facebook</Link>
         </li>
-
         <li>
           <a href='/youtube'>Youtube</a>
         </li>
-
         <li>
           <a href='/tiktok'>Tiktok</a>
         </li>

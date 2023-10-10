@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { Button } from "react-bootstrap";
 
 const Facebook = () => {
   const router = useRouter();
@@ -10,6 +11,7 @@ const Facebook = () => {
   return (
     <div>
       Facebook page
+      <Button>Click me</Button>
       <button className='ml-2' onClick={handleBack}>
         Back
       </button>
