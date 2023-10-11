@@ -1,19 +1,25 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect } from "react";
+
+import AppTable from "@/components/app.table";
 
 const Home = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8000/blogs");
+
+      const data = await res.json();
+
+      console.log("data", data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div>
-      <ul>
-        <li>
-          <Link href='/facebook'>Facebook</Link>
-        </li>
-        <li>
-          <a href='/youtube'>Youtube</a>
-        </li>
-        <li>
-          <a href='/tiktok'>Tiktok</a>
-        </li>
-      </ul>
+    <div className='py-4'>
+      <AppTable />
     </div>
   );
 };
