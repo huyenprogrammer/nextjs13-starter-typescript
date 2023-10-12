@@ -1,24 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
-
 import AppTable from "@/components/app.table";
+import useSWR from "swr";
+
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Home = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:8000/blogs");
+  const { data, error, isLoading } = useSWR(
+    "http://localhost:8000/blogs",
+    fetcher,
+    {
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
+  );
 
-      const data = await res.json();
-
-      console.log("data", data);
-    };
-
-    fetchData();
-  }, []);
+  console.log("data", data);
 
   return (
     <div className='py-4'>
+      <div>{data?.length}</div>
+
       <AppTable />
     </div>
   );
