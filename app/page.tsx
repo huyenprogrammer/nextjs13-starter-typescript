@@ -1,7 +1,8 @@
 "use client";
 
-import AppTable from "@/components/app.table";
 import useSWR from "swr";
+
+import AppTable from "@/components/app.table";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -16,13 +17,15 @@ const Home = () => {
     }
   );
 
-  console.log("data", data);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className='py-4'>
       <div>{data?.length}</div>
 
-      <AppTable />
+      <AppTable blogs={data} />
     </div>
   );
 };
