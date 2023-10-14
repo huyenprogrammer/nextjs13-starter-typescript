@@ -23,8 +23,6 @@ const Home = () => {
 
   return (
     <div className='py-4'>
-      <div>{data?.length}</div>
-
       <AppTable blogs={data} />
     </div>
   );
