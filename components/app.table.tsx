@@ -1,36 +1,39 @@
 "use client";
 
+import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
-const AppTable = () => {
+interface IProps {
+  blogs: IBlog[];
+}
+
+const AppTable = (props: IProps) => {
+  const { blogs } = props;
+
   return (
     <Table bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Actions</th>
         </tr>
       </thead>
+
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {blogs?.map((blog) => (
+          <tr key={blog.id}>
+            <td>{blog.id}</td>
+            <td>{blog.title}</td>
+            <td>{blog.author}</td>
+            <td className='flex gap-2'>
+              <Button>View</Button>
+              <Button variant='warning'>Edit</Button>
+              <Button variant='danger'>Delete</Button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
