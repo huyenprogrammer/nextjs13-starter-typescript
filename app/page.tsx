@@ -23,7 +23,7 @@ const Home = () => {
 
   return (
     <div className='py-4'>
-      <AppTable blogs={data} />
+      <AppTable blogs={data?.sort((a: any, b: any) => b.id - a.id)} />
     </div>
   );
 };
