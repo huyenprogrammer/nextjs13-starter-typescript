@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
 import CreateModal from "./create.model";
+import UpdateModal from "./update.model";
 
 interface IProps {
   blogs: IBlog[];
@@ -13,7 +14,14 @@ interface IProps {
 const AppTable = (props: IProps) => {
   const { blogs } = props;
 
+  const [blog, setBlog] = useState<IBlog | null>(null);
   const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+  const [showModalUpdate, setShowModalUpdate] = useState<boolean>(false);
+
+  const handleOpenUpdateDialog = (item: IBlog) => {
+    setBlog(item);
+    setShowModalUpdate(true);
+  };
 
   return (
     <>
@@ -36,14 +44,19 @@ const AppTable = (props: IProps) => {
         </thead>
 
         <tbody>
-          {blogs?.map((blog) => (
-            <tr key={blog.id}>
-              <td>{blog.id}</td>
-              <td>{blog.title}</td>
-              <td>{blog.author}</td>
+          {blogs?.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.title}</td>
+              <td>{item.author}</td>
               <td className='flex gap-2'>
                 <Button>View</Button>
-                <Button variant='warning'>Edit</Button>
+                <Button
+                  variant='warning'
+                  onClick={() => handleOpenUpdateDialog(item)}
+                >
+                  Edit
+                </Button>
                 <Button variant='danger'>Delete</Button>
               </td>
             </tr>
@@ -54,6 +67,13 @@ const AppTable = (props: IProps) => {
       <CreateModal
         showModalCreate={showModalCreate}
         setShowModalCreate={setShowModalCreate}
+      />
+
+      <UpdateModal
+        showModalUpdate={showModalUpdate}
+        setShowModalUpdate={setShowModalUpdate}
+        blog={blog}
+        setBlog={setBlog}
       />
     </>
   );
